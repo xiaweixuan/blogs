@@ -2,13 +2,15 @@
 
 - [简介](README.md)
 
-- [js](js)
-  * [js异步编程](js/js异步编程.md)
+- [js](js/README.md)
+  
+  - [js异步编程](js/js异步编程.md)
+  
   * [nodejs笔记总结](js/nodejs笔记总结.md)
   * [node单线程问题](js/node单线程问题.md)
-  * [node的模块化实现](js/node的模块化实现.md)
+* [node的模块化实现](js/node的模块化实现.md)
   * [对于js事件的解析](js/对于js事件的解析.md)
-
+  
 - [css布局](css布局.md)
 - [内存控制](内存控制.md)
 - [github仓库关联及常用命令](github仓库关联及常用命令.md)
