@@ -12,32 +12,32 @@
 
 ### css笔记
 
-- [css布局](css布局.md)
-- [sass介绍与使用方法](sass介绍与使用方法.md)
+- [css布局](css/css布局.md)
+- [sass介绍与使用方法](css/sass介绍与使用方法.md)
 
 ### html笔记
 
-- [使用canvas画多边形](使用canvas画多边形.md)
+- [使用canvas画多边形](HTML/使用canvas画多边形.md)
 
 ### git笔记
 
-- [git版本回溯](git版本回溯.md)
-- [更改git账号时无法上传文件](更改git账号时无法上传文件.md)
-- [如何使用git分支团队合作解决问题](如何使用git分支团队合作解决问题.md)
-- [github仓库关联及常用命令](github仓库关联及常用命令.md)
+- [git版本回溯](git/git版本回溯.md)
+- [更改git账号时无法上传文件](git/更改git账号时无法上传文件.md)
+- [如何使用git分支团队合作解决问题](git/如何使用git分支团队合作解决问题.md)
+- [github仓库关联及常用命令](git/github仓库关联及常用命令.md)
 
 ### web前端笔记
 
-- [内存控制](内存控制.md)
-- [web前端常见问题](web前端常见问题.md)
+- [内存控制](web前端/内存控制.md)
+- [web前端常见问题](web前端/web前端常见问题.md)
 
 ### 服务端笔记
 
-- [windows如何安装mysql](windows如何安装mysql.md)
+- [windows如何安装mysql](服务端/windows如何安装mysql.md)
 
 ### 小程序笔记
 
-- [小程序开发如何使用colorUI框架](小程序开发如何使用colorUI框架.md)
+- [小程序开发如何使用colorUI框架](小程序/小程序开发如何使用colorUI框架.md)
 
 
 
