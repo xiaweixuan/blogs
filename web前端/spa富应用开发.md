@@ -48,33 +48,7 @@ npm - -g browser-sync ##热加载工具
 
 * 在tarvis CI关联github，并选择要测试的项目，也可以设置环境变量
 
-* 在主分支，创建.travis.yml，写入一下配置
-
-  ```
-  language: node_js
-  node_js:
-    - "node"
-  
-  after_script:
-    - gitbook build
-    - cd ./_book
-    - git init
-    - git config user.name "${USER_NAME}"
-    - git config user.email "${USER_EMAIL}"
-    - git add .
-    - git commit -m "publish gitbook"
-    - git push --force --quiet "https://${ACC_TOKEN}@${GH_REF}" master:${BRANCH}
-  
-  branches:
-    only:
-      - master
-      
-      
-  ##ACC_TOKEN:token指令
-  ##GH_REF:仓库地址
-  ##BRANCH:分支名
-  ##
-  ```
+* 在主分支，创建.travis.yml，写入配置
 
 * 上传到远程仓库，github会自动执行配置文件中的过程
 
@@ -83,3 +57,32 @@ npm - -g browser-sync ##热加载工具
 master分支中，有文章的md格式文档、summary目录、travis配置文件、依赖配置文件package（包含gitbook-cli模块）
 
 gh-pages分支中，即为`gitbook build`打包后，`_book`目录下的全部内容
+
+travis配置文件:
+
+```markdown
+language: node_js
+node_js:
+  - "node"
+
+after_script:
+  - gitbook build
+  - cd ./_book
+  - git init
+  - git config user.name "${USER_NAME}"
+  - git config user.email "${USER_EMAIL}"
+  - git add .
+  - git commit -m "publish gitbook"
+  - git push --force --quiet "https://${ACC_TOKEN}@${GH_REF}" master:${BRANCH}
+
+branches:
+  only:
+    - master
+    
+    
+##ACC_TOKEN:token指令
+##GH_REF:仓库地址
+##BRANCH:分支名
+##
+```
+
