@@ -9,6 +9,7 @@
 - [node单线程问题](js/node单线程问题.md)
 * [node的模块化实现](js/node的模块化实现.md)
 * [对于js事件的解析](js/对于js事件的解析.md)
+* [js的深层理解](js/js的深层理解.md)
 * [ts笔记](js/ts笔记.md)
 * [ES6](js/ES6.md)
 
