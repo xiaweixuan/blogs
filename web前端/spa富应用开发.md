@@ -86,3 +86,428 @@ branches:
 ##
 ```
 
+#### 编译预处理
+
+通常我们会使用一些高级语言进行开发，而浏览器只支持html、css、js基本代码，所以我们要在开发结束后，将高级代码预处理为基本代码。例如css的超集有less、sass、scss，js的超集有typescript、coffee script。
+
+与上面相同，我们借助grunt的插件来将代码进行预处理。
+
+以less为例
+
+首先需要下载用到的插件
+
+```shell
+npm i -g grunt-cli   
+npm i -D grunt grunt-contrib-less
+```
+
+编写`Gruntflie.js`文件，以下是基本框架
+
+```javascript
+module.exports=function(grunt){
+	grunt.initConfig();
+    grunt.loadNpmTasks();
+    grunt.registerTasks();
+}
+```
+
+在本实例中（处理less）写为
+
+```javascript
+module.exports=function(grunt){
+	grunt.initConfig(
+		less:{
+        	compile:{
+        		files:{'dist/compo;ed.css':"css/*.less"}
+        	}
+        }
+	);
+    grunt.loadNpmTasks("grunt-contrib-less");
+    grunt.registerTask('default',['less:compile']);
+}
+```
+
+在终端`grunt default`完成构建
+
+#### 静态代码检查
+
+属于静态的白盒测试。
+
+检查要素：规则、开发工具检验、命令行工具、Grunt插件、配置文件。
+
+###### html静态代码检查
+
+创建`.htmlhintrc`配置文件,填写要检测的规则
+
+```json
+{
+  "tagname-lowercase": true,
+  "attr-lowercase": true,
+  "attr-value-double-quotes": true,
+  "attr-value-not-empty": false,
+  "attr-no-duplication": true,
+  "doctype-first": true,
+  "tag-pair": true,
+  "empty-tag-not-self-closed": true,
+  "spec-char-escape": true,
+  "id-unique": true,
+  "src-not-empty": true,
+  "title-require": true,
+  "alt-require": true,
+  "doctype-html5": true,
+  "id-class-value": "dash",
+  "style-disabled": false,
+  "inline-style-disabled": false,
+  "inline-script-disabled": false,
+  "space-tab-mixed-disabled": "space",
+  "id-class-ad-disabled": false,
+  "href-abs-or-rel": false,
+  "attr-unsafe-chars": true,
+  "head-script-disabled": true
+}
+```
+
+安装`grunt-htmlhint`模块，编辑`gruntfile.js`。
+
+```javascript
+module.exports=function(grunt){
+	grunt.initConfig(
+		htmlint:{
+        	option:{	
+        		htmlintrc:'./.htmlhintrc'
+        	},
+    		src:['*.html']
+        }
+	);
+    grunt.loadNpmTasks("grunt-htmlhint");
+    grunt.registerTask('default',['htmlint']);
+}
+```
+
+在命令行通过执行`grunt`命令行下进行代码检测。
+
+###### css静态代码检查
+
+填写`.csslintrc`配置文件。
+
+安装`grunt-contrib-csslint`插件，编辑`gruntfile.js`。
+
+```javascript
+module.exports=function(grunt){
+	grunt.initConfig(
+		cssint:{
+        	option:{	
+        		csslintrc:'./.csslintrc'
+        	},
+    		src:['*.css']
+        }
+	);
+    grunt.loadNpmTasks("grunt-contrib-csslint");
+    grunt.registerTask('default',['csslint']);
+}
+```
+
+在命令行通过执行`grunt`命令行下进行代码检测。
+
+###### js静态代码检查
+
+JS下与上面两种同理，用打的是`grunt-eslint`插件,在命令行使用`eslint --init`初始化文件`.eslintrc.json`.
+
+修改配置文件`gruntfile.js`。
+
+```json
+module.exports=function(grunt){
+	grunt.initConfig(
+		esint:{
+        	option:{	
+        		csslintrc:'./.eslintrc.json'
+        	},
+    		src:['*.js']
+        }
+	);
+    grunt.loadNpmTasks("grunt-eslint");
+    grunt.registerTask('default',['eslint']);
+}
+```
+
+在命令行通过执行`grunt`命令行下进行代码检测。
+
+#### 单元测试
+
+属于动态的白盒测试。
+
+程序中的错误种类，语法错误、逻辑错误、运行时错误。
+
+软件测试主要针对于逻辑错误。
+
+测试框架有很多，本文讲的测试主要基于mocha框架。
+
+###### 后端单元测试
+
+以一个`add.js`为例，其代码如下
+
+```javascript
+/*add.js*/
+if(process.argv.length!=4){
+	console.log('sum x y');
+    process.exit(1);
+}
+
+var x=Number(process.argv[2]),
+    y=Number(process.argv[3])
+const add=require('./calc.js')
+console.log(`${add(x,y)}`)
+
+
+/*calc.js*/
+function add(x,y){
+    if((typeof x)==='number' && (typeof y)==='number')
+       return x+y;
+    else
+       return NaN
+}
+
+```
+
+在程序中测试的目标是某一个函数，所以我们真正测试的是`calc.js`
+
+安装环境` mocha `（测试环境）`chai`（断言库）
+
+```shell
+npm install -D mocha chai
+```
+
+创建`test`目录，用于存放测试代码，进入目录创建`calc.test.js`并编写
+
+```javascript
+const add =require("../calc.js"),
+      expect=require("chai").expect;
+
+describe("加法描述",function(){
+    //测试用例,一个it就是一个测试用例
+    it("0+0=0",function(){
+        expect(add(0,0)).to.be.equal(0)
+    });
+    it("1+0=1",function(){
+        expect(add(1,0)).to.be.equal(1)
+    });
+});
+```
+
+在命令行下输入一下命令进行测试
+
+```shell
+node_modules/.bin/mocha
+```
+
+这样就完成了一个测试代码的编写，但是用例写的是否好是测试代码的关键，为了病假单元测试设计的好坏，引入了覆盖率的概念。
+
+覆盖率分为四种：行覆盖率、函数覆盖率、分支覆盖率、语句覆盖率
+
+为了查看测试覆盖率，引入以下依赖
+
+```shell
+npm -i -D istanbul
+```
+
+在命令行进行如下命令,通过`istanbul`进行`mocha`测试，在结果中可显示覆盖率
+
+```shell
+./node_modlues/.bin/istanbul cover ./node_modules/.bin/_mocha
+```
+
+当然这是的手动去测试，我们也可以借助grunt的插件去自动化测试。
+
+###### 前端单元测试
+
+对于前端，我们测试的也是js文件中的逻辑部分即方法、函数，以下面的js文件为例
+
+```javascript
+/*reactange.js*/
+$(function(){
+	var $width=$("#width"),
+        $height=$("#height"),
+        $btnCal=$("#calculate"),
+        $perimeter=$("#perimeter"),
+        $area=$("#area");
+    $btnCal.click(function(){
+        var w=Number($width.val()),
+            h=Number($height.val);
+        
+        var react=reactangle();
+        $perimeter.val(react.perimeter(w,h));
+        $area.val(react.area());
+    })
+})
+/*util.js*/
+function reactabgle(){
+    return {
+        'perimeter':function(w,h){
+            return 2*(w+h)
+        },
+        'area':function(w,h){
+            return w*h
+        }
+    }
+}
+```
+
+在前端`index.html`中引入`util.js`
+
+接下里要生成前端测试环境，安装`mocha chai `
+
+使用`./node_module/.bin/macha init test`生成前端测试环境，生成test目录
+
+创建`util.test.js`
+
+```javascript
+var expect =chai.expect;
+
+describe("矩形面积测试",function(){
+    it("area(10,5)=50",function(){
+        var r=reactangle();
+        expect(r.area(10,5).to.be.equal(50))
+    })
+})
+```
+
+将`util.js ` 和`node_module/chai/chai.js`引入`test`目录下的`index.html`
+
+此时打开页面可查看结果,接下来继续完成自动化测试
+
+下载依赖`grunt grunt-mocha`(前端插件时`grunt-mocha`后端是`grunt-mocha-cli`)其中`grunt-mocha`要安装`^0.4.12`版本
+
+配置`Gruntfile.js`
+
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+        mocha:{
+            test:{
+                src:['test/index.html']
+            },
+            option:{
+                run:true,
+                reportor:'Dot'
+            }
+        }
+    })
+    grunt.loadNpmTasks('grunt-mocha')
+    grunt.registerTask('default',['mocha'])
+}
+```
+
+在命令行下运行`grunt`查看结果
+
+###### http接口测试
+
+假设我们有一个接口
+
+接口：`http://localhost:8080/reatangle?width=20&height=20`
+
+返回结果：`{'code':200,'reason':'查寻成功'，result:{'area':400,'perimeter':80}}`
+
+创建test目录，进入创建`app.test.js`文件编写测试代码
+
+```javascript
+const http =require("http"),
+      expect=require("chai").expect;
+
+describe("接口测试",function(done){//done是引入mocha的异步机制
+    //测试用例,一个it就是一个测试用例
+    it("正确请求格式测试",function(){
+        http.get('http://localhost:8080/reatangle?width=20&height=20',function(res){
+            var result="";
+            res.on('data',(chunk)=>{result+=chunk})
+            res.on('end',()=>{
+                var rect=JSON.parse(result);
+                expect(rect.area)to.be.equal(42);
+                expect(rect.perimeter).to.be.equal(26);
+                done();
+            })
+        })
+        
+    });
+    it("1+0=1",function(){
+        expect(add(1,0)).to.be.equal(1)
+    });
+})
+```
+
+安装`mocha chai`,通过`./node_module/.bin/mocha`进行测试
+
+接下来进行自动化改造
+
+安装`grunt grunt-mocha-cli grunt-run`
+
+编写`Gruntfile.js`
+
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		run:{
+            api:{
+                option:{wait:false},
+                args:['./app.js']
+            }
+        },
+        mochacli:{
+            option:{
+                reporter:'spec',
+                bail:true
+            },
+            all:['test/*.js']
+        }
+    })
+    grunt.loadNpmTasks('grunt-run')
+    grunt.loadNpmTasks('grunt-mocha-cli')
+    grunt.registerTask('default',['run','mochacli','stop:api'])
+}
+```
+
+在命令行执行`grunt`进行测试
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
