@@ -469,21 +469,173 @@ module.exports=function(grunt){
 
 
 
+#### 性能优化
 
+优化的常用手段是`压缩`和`打包`
 
+###### 压缩html
 
+下载插件`grunt grunt-contrib-htmlmin`
 
+编写`Gruntfile.js`
 
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		htmlmin:{
+            options:{
+                removeComments:true,
+                collapseWhitespace:true
+            },
+            files:{
+                src:'./index.html',
+                dest:'dist/index.html'
+                
+            }
+        }
+    })
+    grunt.loadNpmTasks('grunt-contrib-htmlmin')
+    grunt.registerTask('default',['htmlmin'])
+}
+```
 
+在命令行通过`grunt`命令进行打包
 
+###### 压缩css
 
+下载插件`grunt grunt-contrib-cssmin`
 
+编写`Gruntfile.js`
 
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		cssmin:{
+            'rectangle.min.css':'rectangle.css'
+        }
+    })
+    grunt.loadNpmTasks('grunt-contrib-cssmin')
+    grunt.registerTask('default',['cssmin'])
+}
+```
 
+在命令行通过`grunt`命令进行打包
 
+###### 压缩js
 
+下载插件`grunt grunt-contrib-uglify`
 
+编写`Gruntfile.js`
 
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		uglify:{
+            files:{'index.min.js':'index.js'}
+        }
+    })
+    grunt.loadNpmTasks('grunt-contrib-uglify')
+    grunt.registerTask('default',['uglify'])
+}
+```
+
+在命令行通过`grunt`命令进行打包
+
+###### 压缩图片
+
+* 选择合适的图片格式，不同图片有不同的问题
+* 选择合适的图片尺寸，不要放超过展示尺寸的图片
+* 选择适当的压缩格式
+* 关键性图片设置优先加载（设置延迟加载）
+
+下载插件`grunt grunt-contrib-imagemin`
+
+编写`Gruntfile.js`
+
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		imagemin:{
+            files:{
+                expand:true,
+                src:['images/*.{pmg,jpg,gif}'],
+                dest:'dist/'
+            }
+        }
+    })
+    grunt.loadNpmTasks('grunt-contrib-imagemin')
+    grunt.registerTask('default',['imagemin'])
+}
+```
+
+在命令行通过`grunt`命令进行打包
+
+###### 打包合并
+
+下载`grunt grunt-contrib-concat`
+
+编写`Gruntfile.js`
+
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		concat:{
+            js:{
+                expand:true,
+                src:['index.js','util.js'],
+                dest:'dist/main.js'
+            },
+            css:{
+                expand:true,
+                src:['css/*.css'],
+                dest:'dist/main.css'
+            }
+        }
+    })
+    grunt.loadNpmTasks('grunt-contrib-concat')
+    grunt.registerTask('default',['concat:js','concat:css'])
+}
+```
+
+在命令行通过`grunt`命令进行打包
+
+###### 合并子图
+
+下载`grunt grunt-spritesmith`
+
+编写`Gruntfile.js`
+
+```javascript
+module.exports=function(grunt){
+    grunt.initConfig({
+		spritesmith:{
+            file:{
+                src:['images/*.png'],
+                dest:'dist/bundle.png',
+                destCss'dist/sprite.css'
+            }
+        }
+    })
+    grunt.loadNpmTasks('grunt-spritesmith')
+    grunt.registerTask('default',['spritesmith'])
+}
+```
+
+在命令行通过`grunt`命令进行打包,`sprite.css`中写了各个图的用法
+
+#### 自定义一个grunt插件
+
+下载插件`grunt`
+
+编写`Gruntfile.js`
+
+```javascript
+module.exports=function(grunt){
+    grunt.registerTask('build','build task',function(){
+        console.log('build task')
+    })
+}
+```
 
 
 
