@@ -84,32 +84,49 @@ document.body.innerHTML = greeter(user);
 
 定义一种数据结构，它可以去声明一个变量，也可以作为类型检验。接口可以是类接口，函数接口，索引接口。
 
+> interface ：描述一个对象的取值规范
+
+- 属性接口
+
 ```typescript
-//类接口
-interface Person{
-	firstName:number,
-	lastNmae:string,
-	kids?:number,//可有可无的属性
-    readonly age:number//只读的属性
+interface User {
+  name: string;
+  age?: number;
 }
-var p: Person={
-    firstName:"Bart",
-	lastNmae:"Wullems",
-	kids:1
+
+const user1: User = {
+  name: "lili",
+  age: 18
+};
+```
+
+- 函数接口
+
+```typescript
+interface SearchFunc {
+  (source: string, subString: string): boolean;
 }
-function greeter(person: Person) {
-    return "Hello, " + person.firstName + " " + person.lastName;
-}
-document.body.innerHTML = greeter(p);
-//函数接口
-interface AddFunc{
-    (x:number,y:number):number;//两个参数分别是number类型，返回一个number变量
-}
-//索引类型接口
-interface Dick{
-    [key: string]:string;
+
+let myFunc: SearchFunc = function(source: string, subString: string){
+    ...
+    return true;
 }
 ```
+
+- 类接口
+
+```typescript
+interface User {
+  name: string;
+  age?: number;
+}
+  
+class user1 implements User{
+    name='zhangsan'  
+}
+```
+
+
 
 #### 类
 

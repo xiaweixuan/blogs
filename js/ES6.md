@@ -222,6 +222,15 @@ try{
 
 es6虽然自己定义了模块的概念及方法，但通常在使用中，会使用到其他的规范，如nodejs使用的是commonjs规范去定义模块。
 
+#### 9、Iterator
+
+一个统一的接口来遍历所有的数据类型
+
+```javascript
+Array.prototype[Symbol.iterator]().next()
+//返回下一个值
+```
+
 
 
 ## ES2016
