@@ -18,11 +18,11 @@ es每年发布一版，如2017年发布的就叫es2017也叫es8。
 
 在箭头函数中，箭头函数的`this`被设置为封闭的词法环境的，换句话说，箭头函数中的this取决于该函数被创建时的环境（即箭头函数与包围他的代码共享一个this）。
 
-#### 2、默认参数
+#### 2、函数参数
 
 为函数参数添加默认的值
 
-```java
+```javascript
 const test = (a='a',b='b',c='c')=>{
     return a+b+c
 }
@@ -32,17 +32,94 @@ console.log(test('A','B'))     //ABc
 console.log(test('A'))         //Abc
 ```
 
-#### 3、模板字符串
+多参数
 
 ```javascript
+function fuc(...arg){
+    console.log(arg)
+}
+fuc(1,2,3) //[1,2,3]
 
-//不使用模板字符串：
- 
-var name = 'Your name is ' + first + ' ' + last + '.'
- 
-//使用模板字符串：
- 
+```
+
+函数尾调用，在函数最后调用其他函数或者自己
+
+> ```javascript
+> let fun1=(x,y)=>x+y
+> let fun2=()=>{
+>     return fn1(1,2)
+> }
+> console.log(fun2)
+> ```
+>
+> 以上是一个尾调用，在执行fun2的时候，也执行了fun1，当fun1执行完成后，由于再无牵连，会将fun1的内存给fun2继续使用，这样减少了内存占用。
+>
+> 以下情况不是尾调用：
+>
+> ```javascript
+> let fun3=()=>{
+>     let n=fun1(2,3)
+>     return n;
+> }
+> ```
+>
+> 由于不是在最后一步调用所以不是尾调用
+>
+> ```javascript
+> let fun4=()=>{
+> 	return fun1(2,3)+1
+> }
+> ```
+>
+> `return fun1(2,3)+1`他其实是先执行的`fun1(2,3)+1`再执行return，所以此处也不是在最后一步调用，所以也不是尾调用
+
+递归的尾调用优化
+
+> 以下是一个递归函数
+>
+> ```javascript
+> let factorial=(n)=>{
+>     if(n<=1){
+>         return 1;
+>     }else{
+>         return n*factorial(n-1)
+>     }
+> }
+> console.log(factorial(4)) //4*3*2*1
+> ```
+>
+> 由于函数参与了运算，所以不是尾调用，每次调用开辟内存，耗费资源，我们将其改为尾递归
+>
+> ```javascript
+> let factorial=(n,p=1)=>{
+>     if(n<=1){
+>         return p*1;
+>     }else{
+>         let result=p*n
+>         return factorial(n-1,result)
+>     }
+> }
+> console.log(factorial(4)) //4*3*2*1
+> ```
+
+
+
+#### 3、模板字符串
+
+```typescript
+//常见写法
 var name = `Your name is ${first} ${last}.`
+//函数参数写法
+function fuc(a,b,c,d){
+    //b,c,d分别为第一、二、三个变量
+    //a为被变量分割的字符串['name=','age=','logo=']
+    return b+c+d
+}
+let name="xwx"
+let age=21
+let logo="1.png"
+let result=fuc`name=${name}age=${age}logo=${logo}`
+
 ```
 
 #### 4、解构赋值
@@ -231,21 +308,123 @@ Array.prototype[Symbol.iterator]().next()
 //返回下一个值
 ```
 
+#### 10、循环方式
+
+```javascript
+let list=[3,4,5,6]
+for(let i in list){
+    console.log(list[i])
+}
+
+for(let n of list){
+    console.log(n)
+}
+
+list.forEach((n,i)=>{
+    console.log(n)
+})
+```
+
+#### 11、filter
+
+过滤器
+
+```javascript
+let num1=[1,2,3,4]
+let num2=num1.filter(x=>x!=1)//过滤掉1
+console.log(num2) //[2,3,4]
+```
+
+#### 12、Set
+
+主要作用常用操作数组来去重、添加删除成员变量、交并差集
+
+```javascript
+//去重
+let arr1=[1,2,3,2]
+let arr2=new Set(arr1)//[1,2,3]
+
+//添加删除成员
+let arr3=[1,2,3,2]
+let arr4=new Set(arr3)
+arr4.add(0)
+arr4.delete(1)
+
+//并集
+let arr5=[1,2,3,4]
+let arr6=[3,4,5,6]
+let set1=new Set([...arr5,...arr6])
+
+//交集
+let arr7=[1,2,3,4]
+let arr8=[3,4,5,6]
+let set2=new Set([...arr7].filter(x=>arr8.has(x)))
+
+//差集
+let arr9=[1,2,3,4]
+let arr10=[3,4,5,6]
+let set3=new Set([...arr9].filter(x=>!arr10.has(x)))
+
+```
+
+#### 13、Map
+
+通过键值对来存储的数据结构，他与对象的区别是他的key值可以是任意数据类型
+
+```javascript
+let num=123
+let arr=[1,2,3]
+let fun=function(){}
+let obj={}
+
+const map1=new Map();
+map1.set(num,"abc")//赋值
+map1.set(arr,"abc")//赋值
+map1.set(fun,"abc")//赋值
+map1.set(obj,"abc")//赋值
+
+map1.keys()//key值得数组
+map1.values()//value值得数组
+map1.entries()//以Array的格式输出所有项
+
+//直接创建对象
+const map2=new Map(
+	[
+        ["s1","as1"],
+        ["s2","as2"],
+        ["s3","as3"],
+        ["s4","as4"]
+    ]
+)
+map2.detele("s3")
+map2.has("s3")//false
+
+```
+
+
+
+
+
 
 
 ## ES2016
 
-#### 1、includes()
+#### 1、includes()、startsWith()、endsWidth()
 
-用来判断一个数组是否包含某一个值
+用来判断一个**数组**或**字符串**是否包含某一个值
+
+用来判断**字符串**的前n位中是否以一个值开头
+
+用来判断**字符串**的前n位中是否以一个值结尾
 
 ```javascript
 let arr = ['react', 'angular', 'vue'];
- 
-if (arr.includes('react'))
-{
-    console.log('react存在');
-}
+let str = "abc"
+console.log(arr.includes('react'))
+console.log(str.includes('a'))
+console.log(str.startsWith('a',2))
+console.log(str.endsWith('c',3))
+
 ```
 
 #### 2、**指数运算符

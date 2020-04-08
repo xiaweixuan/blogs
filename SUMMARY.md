@@ -12,6 +12,8 @@
 * [js的深层理解](js/js的深层理解.md)
 * [ts笔记](js/ts笔记.md)
 * [ES6](js/ES6.md)
+* [js函数高阶应用](js/js函数高阶应用.md)
+* [js常用api总结](js/js常用api总结.md)
 
 ### css笔记
 
@@ -39,6 +41,7 @@
 - [前端面试复习](web前端/前端面试复习.md)
 - [开源项目流程](web前端/开源项目流程.md)
 - [redux](web前端/redux.md)
+- [vue](web前端/vue.md)
 
 ### 服务端笔记
 
