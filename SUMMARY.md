@@ -42,6 +42,8 @@
 - [开源项目流程](web前端/开源项目流程.md)
 - [redux](web前端/redux.md)
 - [vue](web前端/vue.md)
+- [前端常见特效原理](web前端/前端常见特效原理.md)
+- [vue常见插件](web前端/vue常见插件.md)
 
 ### 服务端笔记
 
