@@ -1,6 +1,6 @@
 <h3 align="center">远赴人间惊鸿宴，一睹人间盛世颜</h3><br/>
 
-<img style="width:60%;margin:auto;border-radius:15px" src="https://xiaweixuan.github.io/MY/brillustration.jpg"/>
+<img style="width:60%;margin:auto;border-radius:15px;display:block" src="https://xiaweixuan.github.io/MY/brillustration.jpg"/>
 
 ​		Hi，阅读者。欢迎来到我的笔记书，这里整理着我在前端学习过程中学习的笔记、知识。
 

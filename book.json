@@ -1,74 +1,75 @@
 {
-  "title": "ÏÄì¿ÐùµÄ±Ê¼Ç",
-  "description" : "ÏÄì¿ÐùµÄÑ§Ï°±Ê¼Ç",
-  "author": "ÏÄì¿Ðù",
-  "language": "zh-hans",
-  "plugins": [
-    "-lunr",
-    "-search",
-    "-highlight",
-    "-sharing",
-    "edit-link",
-    "forkmegithub",
-    "search-plus",
-    "sharing-plus",
-    "anchor-navigation-ex",
-    "copy-code-button",
-    "prism",
-    "github-buttons@2.1.0",
-    "splitter",
-    "image-captions-extended",
-    "bsz",
-    "fancybox",
-    "image-wrapper",
-    "gtalk"
-  ],
-    "anchor-navigation-ex": {
-      "multipleH1": false
-    },
-    "github-buttons": {
-      "repo": "wangding/spa",
-      "types": ["star"],
-      "size": "small"
-    },
-    "forkmegithub": {
-      "url": "https://github.com/wangding/spa",
-      "color": "red"
-    },
-    "edit-link": {
-      "base": "https://github.com/wangding/spa/blob/master/",
-      "label": "±à¼­±¾Ò³"
-    },
-    "sharing": {
-      "douban": true,
-      "facebook": false,
-      "google": false,
-      "hatenaBookmark": false,
-      "instapaper": false,
-      "line": false,
-      "linkedin": false,
-      "messenger": false,
-      "pocket": false,
-      "qq": true,
-      "qzone": true,
-      "stumbleupon": false,
-      "twitter": false,
-      "viber": false,
-      "vk": false,
-      "weibo": true,
-      "whatsapp": false,
-      "all": [
-        "weibo", "douban", "qzone", "qq"
-      ]
-    },
-    "image-captions": {
-      "caption": "Í¼£º_CAPTION_"
-    },
-    "bsz": {
-      "copyright": "2018&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://xiaweixuan.github.io/resume/index.pdf\">ÏÄì¿Ðù</a>.&nbsp;All rights reserved."
-    }
-  },
-  "styles": {
-    "website": "styles/website.css"
-  }
+"gitbook": "3.2.3",
+"title": "ÏÄì¿ÐùµÄ±Ê¼Ç",
+"description": "https://xiaweixuan.github.io/resume/index.pdf",
+"author": "ÏÄì¿Ðù",
+"language": "zh-hans",
+"links": {
+"sidebar": {
+
+}
+},
+"plugins": ["github",
+"donate",
+"splitter",
+"anchor-navigation-ex",
+"-sharing",
+"sharing-plus",
+"-highlight",
+"prism"
+],
+"pluginsConfig": {
+"sharing": {
+"douban": false,
+"facebook": false,
+"google": false,
+"hatenaBookmark": false,
+"instapaper": false,
+"line": false,
+"linkedin": false,
+"messenger": false,
+"pocket": false,
+"qq": false,
+"qzone": false,
+"stumbleupon": false,
+"twitter": false,
+"viber": false,
+"vk": false,
+"weibo": false,
+"whatsapp": false,
+"all": [
+"weibo","qq","qzone","google","douban"
+]
+},
+"github": {
+"url": "https://github.com/xiaweixuan"
+},
+"anchor-navigation-ex": {
+"associatedWithSummary":false,
+"showLevel":true,
+"multipleH1": true,
+"mode": "float",
+
+"pageTop": {
+"showLevelIcon": false,
+"level1Icon": "fa fa-hand-o-right",
+"level2Icon": "fa fa-hand-o-right",
+"level3Icon": "fa fa-hand-o-right"
+}
+},
+"theme-default": {
+"showLevel": true
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"prism": {
+"css": [
+"prismjs/themes/prism-tomorrow.css"
+]
+}
+}
+
 }
