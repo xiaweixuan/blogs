@@ -1,0 +1,74 @@
+{
+  "title": "ÏÄì¿ÐùµÄ±Ê¼Ç",
+  "description" : "ÏÄì¿ÐùµÄÑ§Ï°±Ê¼Ç",
+  "author": "ÏÄì¿Ðù",
+  "language": "zh-hans",
+  "plugins": [
+    "-lunr",
+    "-search",
+    "-highlight",
+    "-sharing",
+    "edit-link",
+    "forkmegithub",
+    "search-plus",
+    "sharing-plus",
+    "anchor-navigation-ex",
+    "copy-code-button",
+    "prism",
+    "github-buttons@2.1.0",
+    "splitter",
+    "image-captions-extended",
+    "bsz",
+    "fancybox",
+    "image-wrapper",
+    "gtalk"
+  ],
+    "anchor-navigation-ex": {
+      "multipleH1": false
+    },
+    "github-buttons": {
+      "repo": "wangding/spa",
+      "types": ["star"],
+      "size": "small"
+    },
+    "forkmegithub": {
+      "url": "https://github.com/wangding/spa",
+      "color": "red"
+    },
+    "edit-link": {
+      "base": "https://github.com/wangding/spa/blob/master/",
+      "label": "±à¼­±¾Ò³"
+    },
+    "sharing": {
+      "douban": true,
+      "facebook": false,
+      "google": false,
+      "hatenaBookmark": false,
+      "instapaper": false,
+      "line": false,
+      "linkedin": false,
+      "messenger": false,
+      "pocket": false,
+      "qq": true,
+      "qzone": true,
+      "stumbleupon": false,
+      "twitter": false,
+      "viber": false,
+      "vk": false,
+      "weibo": true,
+      "whatsapp": false,
+      "all": [
+        "weibo", "douban", "qzone", "qq"
+      ]
+    },
+    "image-captions": {
+      "caption": "Í¼£º_CAPTION_"
+    },
+    "bsz": {
+      "copyright": "2018&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://xiaweixuan.github.io/resume/index.pdf\">ÏÄì¿Ðù</a>.&nbsp;All rights reserved."
+    }
+  },
+  "styles": {
+    "website": "styles/website.css"
+  }
+}
