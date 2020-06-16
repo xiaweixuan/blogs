@@ -1,6 +1,6 @@
 <h3 align="center">远赴人间惊鸿宴，一睹人间盛世颜</h3>
 
-<img  align="center" src="https://xiaweixuan.github.io/MY/brillustration.jpg"/>
+<img width="100%" src="https://xiaweixuan.github.io/MY/brillustration.jpg"/>
 
 
 
