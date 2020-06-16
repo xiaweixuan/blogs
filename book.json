@@ -42,7 +42,7 @@
         },
         "donate": {
             "wechat": "/assets/images/wxpay.png",
-            "alipay": "/assets/images/alipay.png",
+            "alipay": "/assets/images/wxpay.png",
             "title": "",
             "button": "…Õ",
             "alipayText": "÷ß∏∂±¶¥Ú…Õ",
@@ -70,10 +70,6 @@
         }
     },
     "styles": {
-        "website": "assets/styles/website.less",
-        "ebook": "assets/styles/ebook.less",
-        "pdf": "assets/styles/pdf.less",
-        "mobi": "assets/styles/mobi.less",
-        "epub": "assets/styles/epub.less"
+        "website": "assets/styles/website.css"
     }
 }
