@@ -1,74 +1,66 @@
 {
-  "title": "ÏÄì¿Ðù",
-  "description" : "ÏÄì¿ÐùµÄÑ§Ï°±Ê¼Ç",
-  "author": "ÏÄì¿Ðù",
-  "language": "zh-hans",
-  "plugins": [
-    "-lunr",
-    "-search",
-    "-highlight",
-    "-sharing",
-    "edit-link",
-    "forkmegithub",
-    "search-plus",
-    "sharing-plus",
-    "anchor-navigation-ex",
-    "copy-code-button",
-    "prism",
-    "splitter",
-    "image-captions-extended",
-    "bsz",
-    "fancybox",
-    "image-wrapper",
-    "donate",
-  ],
-  "pluginsConfig": {
-    "donate": {
-            "wechat": "assets/images/wxpay.png",
-            "alipay": "assets/images/wxpay.png",
+    "title": "ÏÄì¿ÐùµÄ±Ê¼Ç",
+    "description": "ÏÄì¿ÐùµÄ±Ê¼Ç",
+    "author": "ÏÄì¿Ðù",
+    "output.name": "site",
+    "language": "zh-hans",
+    "gitbook": "3.2.3",
+    "root": ".",
+    "links": {
+        "sidebar": {
+            "Ê×Ò³": "note.xiawx.top"
+        }
+    },
+    "plugins": [
+        "code",
+        "-search",
+        "search-pro",
+        "github",
+        "splitter",
+        "tbfed-pagefooter",
+        "donate",
+        "-sharing",
+        "sharing-plus",
+        "-highlight",
+        "styles-less",
+        "toggle-chapters",
+        "multipart",
+        "ancre-navigation"
+    ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/xiaweixuan"
+        },
+        "code": {
+            "copyButtons": true
+        },
+        "tbfed-pagefooter": {
+            "copyright": "Copyright ? lijiam 2019",
+            "modify_label": "±¾Êé·¢²¼Ê±¼ä£º",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "donate": {
+            "wechat": "/assets/images/wxpay.png",
+            "alipay": "/assets/images/wxpay.png",
             "title": "",
             "button": "ÉÍ",
             "alipayText": "Ö§¸¶±¦´òÉÍ",
             "wechatText": "Î¢ÐÅ´òÉÍ"
+        },
+        "sharing": {
+            "facebook": true,
+            "twitter": true,
+            "weibo": true,
+            "qq": true,
+            "all": [
+                "douban",
+                "google",
+                "qzone",
+                "linkedin"
+            ]
+        }
     },
-    "anchor-navigation-ex": {
-      "multipleH1": false
-    },
-    "forkmegithub": {
-      "url": "https://github.com/xiaweixuan/blogs",
-      "color": "red"
-    },
-    "edit-link": {
-      "base": "https://github.com/xiaweixuan/blogs/master/",
-      "label": "±à¼­±¾Ò³"
-    },
-    "sharing": {
-      "douban": true,
-      "facebook": false,
-      "google": false,
-      "hatenaBookmark": false,
-      "instapaper": false,
-      "line": false,
-      "linkedin": false,
-      "messenger": false,
-      "pocket": false,
-      "qq": true,
-      "qzone": true,
-      "stumbleupon": false,
-      "twitter": false,
-      "viber": false,
-      "vk": false,
-      "weibo": true,
-      "whatsapp": false,
-      "all": [
-        "weibo", "douban", "qzone", "qq"
-      ]
-    },
-    "bsz": {
-      "copyright": "2020&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://xiaweixuan.github.io/resume/index.pdf">ÏÄì¿Ðù</a>.&nbsp;All rights reserved."
+    "styles": {
+        "website": "assets/styles/website.css"
     }
-  },
-  "styles": {
-    "website": "assets/styles/website.css"
-  }
 }
