@@ -141,13 +141,77 @@ export default {
 
 ### router
 
-##### 转跳
+##### 转跳、传参
 
-
-
-##### 参数传递
-
-
+> ###### 标签转跳
+>
+> ```javascript
+> 1. 不带参数
+>  <router-link :to="{name:'home'}"> 
+> <router-link :to="{path:'/home'}"> //name,path都行, 建议用name 
+> // 注意：router-link中链接如果是'/'开始就是从根路由开始，如果开始不带'/'，则从当前路由开始。
+>  2.带参数
+>  <router-link :to="{name:'home', params: {id:1}}"> 
+> // params传参数 (类似post)
+> // 路由配置 path: "/home/:id" 或者 path: "/home:id" 
+> // 不配置path ,第一次可请求,刷新页面id会消失
+> // 配置path,刷新页面id会保留
+> // html 取参 $route.params.id
+> // script 取参 this.$route.params.id
+> <router-link :to="{name:'home', query: {id:1}}"> 
+> // query传参数 (类似get,url后面会显示参数)
+> // 路由可不配置
+> // html 取参 $route.query.id
+> // script 取参 this.$route.query.id
+> ```
+>
+> ##### **push**
+>
+> ```javascript
+> 1. 不带参数
+> this.$router.push('/home')
+> this.$router.push({name:'home'})
+> this.$router.push({path:'/home'})
+> 2. query传参 
+> this.$router.push({name:'home',query: {id:'1'}})
+> this.$router.push({path:'/home',query: {id:'1'}})
+> // html 取参 $route.query.id
+> // script 取参 this.$route.query.id
+> 3. params传参
+>  this.$router.push({name:'home',params: {id:'1'}}) // 只能用 name
+>  
+> // 路由配置 path: "/home/:id" 或者 path: "/home:id" ,
+> // 不配置path ,第一次可请求,刷新页面id会消失
+> // 配置path,刷新页面id会保留
+> // html 取参 $route.params.id
+> // script 取参 this.$route.params.id
+> 4. query和params区别
+> query类似 get, 跳转之后页面 url后面会拼接参数,类似?id=1, 非重要性的可以这样传, 密码之类还是用params刷新页面id还在
+>  params类似 post, 跳转之后页面 url后面不会拼接参数 , 但是刷新页面id 会消失
+> ```
+>
+> ##### replace
+>
+> ```
+> 使用this.$router.replace() (用法同上,push)
+> ```
+>
+> ##### go
+>
+> ```javascript
+> this.$router.go(n)
+> 向前或者向后跳转n个页面，n可为正整数或负整数
+> ```
+>
+> ##### 区别
+>
+> * push：跳转到指定路径，并想history栈中添加一个记录，点击后退会返回到上一个页面
+>
+> * replace：跳转到指定路径，但是history栈中不会有记录，点击返回会跳转到上上个页面 (就是直接替换了当前页面)
+>
+> * go：向前或者向后跳转n个页面，n可为正整数或负整数
+>
+> 
 
 ##### keep-alive
 
@@ -155,15 +219,150 @@ export default {
 
 ### vuex
 
-##### action
-
-##### state
-
-##### getter
-
-##### mutation
+用于状态存储，如果是小型项目可以考虑使用bus
 
 
+
+简单介绍下store的使用方法
+
+> 在`main.js`中引入
+>
+> ```javascript
+> import Vue from 'vue'
+> import Vuex from 'vuex'
+> import store from './store'
+> 
+> Vuew.use(Vuex)
+> new Vue({
+>     store
+> })
+> 
+> ```
+>
+> store定义
+>
+> * state中是你所需要存储的状态值
+> * mutations中是你的逻辑操作
+> * actions中是你的业务方法，在他里面去调用逻辑操作
+> * getters中是属于计算属性
+> * 当我们分模块分别创建多个store的时候将他们最终归入module中
+>
+> ```javascript
+> export default new Vuex.Store({
+>   state: {
+>       count:0
+>   },
+>   getters:{
+>   	  myCount(state){
+>           return `数值是${state.count}`
+>       }      
+>   },
+>   mutations: {
+>       increment(state,n){
+>           state.count+=n
+>       },
+>       decrement(state,n){
+>           state.count-=n
+>       }
+>   },
+>   actions: {
+>       async myIncrement(context,obj){
+>           context.commit('increment',2)
+>           await const products=[1,2,3]
+>           console.log(obj)
+>           //其他业务
+>           return products
+>       },
+>       async myDecrement(context){
+>         context.commit('increment',2)
+>         await const products=[1,2,3]
+>         //其他业务
+>         return products
+>     }
+>   },
+>   modules: {
+>   }
+> })
+> ```
+>
+> 在组件中调用
+>
+> ```javascript
+> //调用state值
+> import {mapState,mapGetters} from 'vuex'
+> computed:{
+>     ...mapState(['count'])
+>     ...mapGetters(['myCount'])
+> }
+> {{count}}
+> {{myCount}}
+> //改变值
+> import {mapMutations,mapActions} from 'vuex'
+> methods:{
+>     ...mapMutations(['increment','decrement'])
+> 	...mapActions(['myIncrement','myDecrement']) 
+>     async increase(){
+>         this.$store.state.count+=1//不推荐
+>         this.increment()//直接调用逻辑方法，也不推荐
+>         const prodicts=await this.myIncrement({a:1})
+>     }
+> }
+> ```
+
+但通常，我们的目录是比较复杂的
+
+> 在大型项目中。我们的目录通常是这样
+>
+> ```
+> ├── index.html
+> ├── main.js
+> ├── api
+> │   └── ... # 抽取出API请求
+> ├── components
+> │   ├── common
+> │   └── page
+> └── store
+>     ├── index.js          # 我们组装模块并导出 store 的地方
+>     ├── actions.js        # 根级别的 action
+>     ├── mutations.js      # 根级别的 mutation
+>     └── modules
+>         ├── cart.js       # 购物车模块
+>         └── products.js   # 产品模块
+> ```
+>
+> 其中每个模块中都包括自己的一个store及其自己的state、getters、action等
+>
+> 最终合并后
+>
+> ```javascript
+> //index.js
+> export default new Vuex.Store({
+>     //...
+>     module:{
+>         
+>     }
+> })
+> //cart.js
+> export default const cart={
+>     state:{},
+>     getters:{},
+>     mutations:{},
+>     actions:{}
+> }
+> //调用state值,调用cart模块中的值
+> import {mapState,mapGetters} form 'vuex'
+> computed:{
+>     ...mapState({
+>         count:state=>{
+>             return state.app.count
+>         }
+>     })
+> }
+> {{count}}
+> //改变值和之前相同
+> ```
+>
+> 
 
 ### 高阶
 
@@ -288,83 +487,50 @@ export default {
 
 ##### 插件
 
-### 原理
-
-​			
 
 
+### Vue3.0
 
+##### 特性
 
+`vue3.0`重要的特点就是讲之前的`option api`改为了`composition api`
 
+也就是`组合式api`，一个功能就是一个`api`
 
-
-`vue`模块在不同模块规范下有相对应不同的模块可下载，且每种规范下，有分有完整版与运行时版。
-
-- **完整版**：同时包含编译器和运行时的版本。
-- **编译器**：用来将模板字符串编译成为 JavaScript 渲染函数的代码。
-- **运行时**：用来创建 Vue 实例、渲染并处理虚拟 DOM 等的代码。基本上就是除去编译器的其它一切。
+在2.0中，我们创建`vue`对象通常是
 
 ```javascript
-// 需要编译器
-new Vue({
-  template: '<div>{{ hi }}</div>'
-})
-
-// 不需要编译器
-new Vue({
-  render (h) {
-    return h('div', this.hi)
-  }
-})
-```
-
-####  实例创建
-
-```vue
-/*逻辑层*/
-<script>
-var data = { message: 'Hello'}
-Object.freeze(data)//使得属性不可被修改，响应系统无法再追踪变化
 var vm = new Vue({
-  	el: '#example',
-  	data: data,
-    created: function () {
-    	// `this` 指向 vm 实例
-    	console.log('message is: ' + this.message)
-    },
-    computed: {
-    	// 计算属性的 getter
-    	reversedMessage: function () {
-      		// `this` 指向 vm 实例
-      		return this.message.split('').reverse().join('')
-    	}
-        //可以自行定义set和get方法
-        //set :function(){}
-        //get :function(){}
-  	},
-    methods: {
-  		reversedMsg: function () {
-    		return this.message.split('').reverse().join('')
-  		}
-	},
-    watch: {
-    	reversedMessage: function () {
-      		this.msg = this.message.split('').reverse().join('')
-    	}
-  	}
+  el: '#app',
+  data: data
 })
-vm.a == data.a //true
-
-</script>
-
-/*显示数据*/
-<p>{{ message }}</p>
-<p>{{ reversedMessage }}</p>
-<p>{{ reversedMsg() }}</p>
-<p>{{ msg }}</p>
 ```
 
-虽然没有完全遵循 [MVVM 模型](https://zh.wikipedia.org/wiki/MVVM)，但是 Vue 的设计也受到了它的启发。因此在文档中经常会使用 `vm` (ViewModel 的缩写) 这个变量名表示 Vue 实例。 
+在3.0中，我们可以改变了方式
 
-在创建这个实例时，传入参数，通过控制参数来控制渲染一个组件。
+```javascript
+Vue.createApp({
+    data:()=>({
+        tag:true
+    })
+}).moute('#app')
+```
+
+##### 优点
+
+* 没有了this的烦恼
+* 更好的而类型推到能力（ts）
+* 更友好的`Tree-shaking`支持
+* 更大的代码压缩空间
+* 更灵活的逻辑复用能力
+
+
+
+
+
+
+
+
+
+
 

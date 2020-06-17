@@ -332,7 +332,7 @@ export default HttpRequest
 
 ```javascript
 export const getLoginInfo = (data) => {
-  return axios.request({
+  return HttpRequest.request({
     url: '/login/' + data.username + '/' + data.password + '/' + data.role,
     method: 'post',
     data: data

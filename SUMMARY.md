@@ -14,6 +14,7 @@
 * [ES6](js/ES6.md)
 * [js函数高阶应用](js/js函数高阶应用.md)
 * [js常用api总结](js/js常用api总结.md)
+* [babel](js/babel.md)
 
 ### css笔记
 
