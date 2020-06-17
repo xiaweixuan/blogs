@@ -20,18 +20,9 @@
     "bsz",
     "fancybox",
     "image-wrapper",
-    "gtalk",
     "donate",
   ],
   "pluginsConfig": {
-    "gtalk": {
-      "clientID": "086e21b153d1d4f035be",
-      "clientSecret": "62086ccd1d88050f3f9d4fe2124844dcfaac8ba6",
-      "repo": "spa",
-      "owner": "ÏÄì¿Ðù",
-      "admin": ["ÏÄì¿Ðù"],
-      "labels": ["NOTE"]
-    },
     "donate": {
             "wechat": "assets/images/wxpay.png",
             "alipay": "assets/images/wxpay.png",
@@ -48,7 +39,7 @@
       "color": "red"
     },
     "edit-link": {
-      "base": "https://github.com/ÏÄì¿Ðù/blogs/master/",
+      "base": "https://github.com/xiaweixuan/blogs/master/",
       "label": "±à¼­±¾Ò³"
     },
     "sharing": {
@@ -72,9 +63,6 @@
       "all": [
         "weibo", "douban", "qzone", "qq"
       ]
-    },
-    "image-captions": {
-      "caption": "Í¼£º_CAPTION_"
     },
     "bsz": {
       "copyright": "2020&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://xiaweixuan.github.io/resume/index.pdf">ÏÄì¿Ðù</a>.&nbsp;All rights reserved."
