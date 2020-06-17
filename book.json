@@ -1,14 +1,14 @@
-{
-    "title": "ÏÄì¿ĞùµÄ±Ê¼Ç",
-    "description": "ÏÄì¿ĞùµÄ±Ê¼Ç",
-    "author": "ÏÄì¿Ğù",
+ï»¿{
+    "title": "å¤ç‚œè½©çš„ç¬”è®°",
+    "description": "å¤ç‚œè½©çš„ç¬”è®°",
+    "author": "å¤ç‚œè½©",
     "output.name": "site",
     "language": "zh-hans",
     "gitbook": "3.2.3",
     "root": ".",
     "links": {
         "sidebar": {
-            "Ê×Ò³": "note.xiawx.top"
+            "é¦–é¡µ": "note.xiawx.top"
         }
     },
     "plugins": [
@@ -25,7 +25,12 @@
         "styles-less",
         "toggle-chapters",
         "multipart",
-        "ancre-navigation"
+        "ancre-navigation",
+        "expandable-chapters-small",
+        "advanced-emoji",
+        "page-treeview",
+        "page-toc-button",
+        "pageview-count"
     ],
     "pluginsConfig": {
         "github": {
@@ -36,16 +41,16 @@
         },
         "tbfed-pagefooter": {
             "copyright": "Copyright ? lijiam 2019",
-            "modify_label": "±¾Êé·¢²¼Ê±¼ä£º",
+            "modify_label": "æœ¬ä¹¦å‘å¸ƒæ—¶é—´ï¼š",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
         "donate": {
             "wechat": "/assets/images/wxpay.png",
             "alipay": "/assets/images/wxpay.png",
             "title": "",
-            "button": "ÉÍ",
-            "alipayText": "Ö§¸¶±¦´òÉÍ",
-            "wechatText": "Î¢ĞÅ´òÉÍ"
+            "button": "èµ",
+            "alipayText": "æ”¯ä»˜å®æ‰“èµ",
+            "wechatText": "å¾®ä¿¡æ‰“èµ"
         },
         "sharing": {
             "facebook": true,
