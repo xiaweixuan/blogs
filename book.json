@@ -8,7 +8,7 @@
     "root": ".",
     "links": {
         "sidebar": {
-            "首页": "note.xiawx.top"
+            "首页": "https://note.xiawx.top"
         }
     },
     "plugins": [
@@ -17,7 +17,6 @@
         "search-pro",
         "github",
         "splitter",
-        "tbfed-pagefooter",
         "donate",
         "-sharing",
         "sharing-plus",
@@ -26,23 +25,24 @@
         "toggle-chapters",
         "multipart",
         "ancre-navigation",
-        "expandable-chapters-small",
+        "expandable-chapters",
         "advanced-emoji",
         "page-treeview",
         "page-toc-button",
-        "pageview-count"
+        "pageview-count",
+        "back-to-top-button",
+        "bsz"
     ],
     "pluginsConfig": {
+        "page-toc-button": {
+            "maxTocDepth": 2,
+            "minTocSize": 2
+        },
         "github": {
             "url": "https://github.com/xiaweixuan"
         },
         "code": {
             "copyButtons": true
-        },
-        "tbfed-pagefooter": {
-            "copyright": "Copyright ? lijiam 2019",
-            "modify_label": "本书发布时间：",
-            "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
         "donate": {
             "wechat": "/assets/images/wxpay.png",
@@ -63,6 +63,9 @@
                 "qzone",
                 "linkedin"
             ]
+        },
+        "bsz": {
+            "copyright": "2020&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://note.xiawx.top\">夏炜轩</a>.&nbsp;All rights reserved."
         }
     },
     "styles": {

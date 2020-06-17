@@ -369,7 +369,6 @@ npm init后
 创建.gitignore文件书写，里面指定的文件不会上传到git上
 
 ```
-# dependencies
 /node_modules
 ```
 
