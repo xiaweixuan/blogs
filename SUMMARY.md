@@ -62,7 +62,7 @@
 
 - [webpack复习总结](web前端/webpack复习总结.md)
 
-- [mvvm复习总结](web前端/mvvm.md)
+- [mvvm](web前端/mvvm.md)
 
   
 
