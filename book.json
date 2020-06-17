@@ -25,14 +25,19 @@
         "toggle-chapters",
         "multipart",
         "ancre-navigation",
-        "expandable-chapters",
+        "chapter-fold",
         "advanced-emoji",
         "page-toc-button",
         "pageview-count",
         "back-to-top-button",
-        "bsz"
+        "bsz",
+        "simple-page-toc"
     ],
     "pluginsConfig": {
+        "simple-page-toc": {
+            "maxDepth": 3,
+            "skipFirstH1": true
+        },
         "page-toc-button": {
             "maxTocDepth": 2,
             "minTocSize": 2
