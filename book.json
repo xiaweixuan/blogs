@@ -27,7 +27,6 @@
         "ancre-navigation",
         "expandable-chapters",
         "advanced-emoji",
-        "page-treeview",
         "page-toc-button",
         "pageview-count",
         "back-to-top-button",
@@ -48,9 +47,9 @@
             "wechat": "/assets/images/wxpay.png",
             "alipay": "/assets/images/wxpay.png",
             "title": "",
-            "button": "赏",
-            "alipayText": "支付宝打赏",
-            "wechatText": "微信打赏"
+            "button": "赞赏",
+            "alipayText": "一个是微信打赏",
+            "wechatText": "另一个也是微信打赏"
         },
         "sharing": {
             "facebook": true,
@@ -65,7 +64,7 @@
             ]
         },
         "bsz": {
-            "copyright": "2020&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://note.xiawx.top\">夏炜轩</a>.&nbsp;All rights reserved."
+            "copyright": "2018&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://note.xiawx.top\">夏炜轩</a>.&nbsp;All rights reserved."
         }
     },
     "styles": {
