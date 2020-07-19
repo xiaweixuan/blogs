@@ -49,8 +49,8 @@
             "alipay": "/assets/images/wxpay.png",
             "title": "",
             "button": "赞赏",
-            "alipayText": "一个是微信打赏",
-            "wechatText": "另一个也是微信打赏"
+            "alipayText": "另一个是也微信打赏",
+            "wechatText": "一个是微信打赏"
         },
         "sharing": {
             "facebook": true,

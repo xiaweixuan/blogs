@@ -1,9 +1,8 @@
 language: node_js
 node_js:
-  - "node"
+  - "10"
 
 after_script:
-  - npm i gitbook-cli
   - gitbook install
   - gitbook build
   - cd ./_book
