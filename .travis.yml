@@ -3,6 +3,7 @@ node_js:
   - "node"
 
 after_script:
+  - npm i gitbook-cli
   - gitbook install
   - gitbook build
   - cd ./_book
