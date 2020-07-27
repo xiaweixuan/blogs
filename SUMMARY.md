@@ -46,6 +46,8 @@
 
 - [redux](web前端/redux.md)
 
+- [http](web前端/http.md)
+
 - [vue常见插件](web前端/vue常见插件.md)
 
 - [reactNative](web前端/reactNative.md)
