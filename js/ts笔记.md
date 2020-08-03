@@ -249,6 +249,66 @@ let output = identity("myString");//编辑器会自动查询myString的类型，
 
 ```
 
+泛型与接口连用方法基本相同
+
+```javascript
+interface Human {
+    name: string
+    age: number
+}
+interface Animal {
+    category: string
+}
+
+function create<T>(what: T): T {
+    return what
+}
+
+create<Human>({
+    name: 'Jack',
+    age: 18
+})
+
+create<Animal>({
+    category: 'dog'
+})
+
+//注意下面
+interface JJ {
+    jjSize: string
+    jjLength: number
+}
+interface Human {
+    name: string
+    age: number
+}
+
+function create<T extends JJ>(what: T): T {
+    return what
+}
+
+create({
+    name: 'Jack',
+    age: 18,
+    jjSize: 'large',
+    jjLength: 18
+})
+
+create({
+    name: 'Jack',
+    age: 18
+}) // 报错：没有 jjSize 和 jjLength
+```
+
+泛型与类的合用
+
+```javascript
+function create<T>(c: { new (): T }): T {
+    return new c()
+}
+//两个括号里写的是 new () 说明传入的 C 是可以用 new C() 的。然后为new ()添加类型，为函数输出添加类型
+```
+
 
 
 
