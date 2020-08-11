@@ -6,9 +6,11 @@
 
 他的工作过程如下
 
-* 解析入口模块，根据代码中的import或者是require之类的语句，推理出所有依赖的资源模块，最终得到依赖关系树
-* 遍历（递归）依赖树，找到每个节点对应的资源文件，根据配置中的的loader配置就，交给对应的loader加载这个模块，将加载结果放到`bundle.js`中
-* 对于依赖模块中无法通过 JavaScript 代码表示的资源模块，例如图片或字体文件，一般的 Loader 会将它们单独作为资源文件拷贝到输出目录中，然后将这个资源文件所对应的访问路径作为这个模块的导出成员暴露给外部。
+* 载入 Webpack 核心模块，创建 Compiler 对象；
+* 使用 Compiler 对象开始编译整个项目；
+* 从入口文件开始，解析模块依赖，形成依赖关系树；
+* 递归依赖树，将每个模块交给对应的 Loader 处理；
+* 合并 Loader 处理完的结果，将打包结果输出到 dist 目录。
 
 ##### module、chunk、bundle
 
@@ -1118,6 +1120,52 @@ module.exports = smart(webpackCommonConf, {
 > 因为`es6`的module是静态引入即编译时引用，`commonjs`是动态引入，执行时引入
 >
 > 打包的时候还没有执行，所以必须使用静态引入的
+
+
+
+### 自定义插件
+
+Webpack 要求我们的插件必须是一个函数或者是一个包含 apply 方法的对象，一般我们都会定义一个类型，在这个类型中定义 apply 方法。然后在使用时，再通过这个类型来创建一个实例对象去使用这个插件。
+
+常见的生命钩子
+
+* entryOption：在处理完webpack选项的[`entry`配置](https://webpack.js.org/configuration/entry-context/#entry)后调用。
+* afterPlugins：在设置初始内部插件集之后调用。
+* afterResolvers：解析器设置完成后触发。
+* environment：在初始化配置文件中的插件之后，在准备编译器环境时调用。
+*  `afterEnvironment`：编译器环境设置完成后，在挂钩之后立即调用。
+*  beforeRun：在运行编译器之前添加一个挂钩。
+*  beforeCompile：创建编译参数后执行插件。
+* compile：beforeCompile之后执行  
+*  afterCompile：在完成并密封编译后调用。
+* emit：在将资产释放到输出目录之前立即执行。
+* afterEmit：在将资产释放到输出目录后调用。
+
+选择合适的生命周期，添加需要挂载的方法和函数操作
+
+compiler 对象参数，里面包含了我们此次构建的所有配置信息，我们就是通过这个对象去注册钩子函数
+
+compilation 对象参数，这个对象可以理解为此次运行打包的上下文，所有打包过程中产生的结果，都会放到这个对象中。
+
+```javascript
+class RemoveCommentsPlugin {
+  apply (compiler) {
+    compiler.hooks.emit.tap('RemoveCommentsPlugin', compilation => {
+      // compilation => 可以理解为此次打包的上下文
+      for (const name in compilation.assets) {
+        if (name.endsWith('.js')) {
+          const contents = compilation.assets[name].source()
+          const noComments = contents.replace(/\/\*{2,}\/\s?/g, '')
+          compilation.assets[name] = {
+            source: () => noComments,
+            size: () => noComments.length
+          }
+        }
+      }
+    })
+  }
+}
+```
 
 
 

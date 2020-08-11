@@ -17,9 +17,27 @@
 ###### 生成新数组
 
 > * join()：数组转化为字符串
->
-> * `concat()`：将参数的数字或数组添加到源数组中
+>* `concat()`：将参数的数字或数组添加到源数组中
 > * slice()：截取起始项和结束位置（不包括结束位置）
+
+###### 其他方法
+
+* reduce
+
+  ```javascript
+  //arr.reduce(callback,[initialValue])
+  
+  //callback （执行数组中每个值的函数，包含四个参数）
+  	//1、previousValue （上一次调用回调返回的值，或者是提供的初始值（initialValue））
+  	//2、currentValue （数组中当前被处理的元素）
+  	//3、index （当前元素在数组中的索引）
+  	//4、array （调用 reduce 的数组）
+  //initialValue （作为第一次调用 callback 的第一个参数。）
+  
+  
+  ```
+
+  
 
 #### 字符串方法
 
@@ -31,3 +49,4 @@
 > * `slice()`: 返回字符串中提取的子字符串。
 > * `substring()`: 提取字符串中介于两个指定下标之间的字符。
 > * `split()`: 把字符串分割成字符串数组。
+
