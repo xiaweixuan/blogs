@@ -13,6 +13,7 @@
 - [js函数高阶应用](js/js函数高阶应用.md)
 - [js常用api总结](js/js常用api总结.md)
 - [babel](js/babel.md)
+- [常见方法封装](js/常见方法封装.md)
 
 ### css笔记
 
