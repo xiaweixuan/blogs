@@ -1,4 +1,4 @@
-﻿
+
 
 - [简介](README.md)
 
@@ -44,6 +44,8 @@
 - [mvvm](web前端/mvvm.md)
 
 - [redux](web前端/redux.md)
+
+- [前端算法总结](web前端/前端算法总结.md)
 
 - [http](web前端/http.md)
 
