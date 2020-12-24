@@ -585,6 +585,119 @@ this.props.history.push({pathname:"/web/departManange?tenantId" + row.tenantId})
 
 ### 原理
 
+#### 首次渲染流程
+
+* jsx经过babel编译成React.createElement的表达式
+
+* React.render(React.createElement())执行
+* React.createElement()执行生成一个element
+* 执行React.render函数，进行初始化此element
+  * 判断element类别，假如是自定义组件
+  * 初始化ReactCompositeComponentWrapper类
+  * 调用mountComponent方法
+    * 实例化自己的组件，例如叫Home类，得到instance
+    * componentWillMount
+    * renderedElement = instance.render()
+    * 初始化renderedElement，得到child
+    * componentDidMount
+    * child.mountComponent(container)
+
+
+
+> element下面有
+>
+> element的种类：string、原生DOM节点、React Component - 自定义组件、数组、null等
+
+
+
+> 初始化element不同种类初始化时会用到不同的类
+>
+> 是对象-------原生DOM ReactDOMComponent
+>
+> ​				---自定义类 ReactCompositeComponentWrapper
+>
+> 不是对象-----string、number ReactDOMTextComponent
+>
+> ​				----ull、false ReactDOMEmptyComponent
+>
+> 每个类下面都有mountComponent、updateComponent
+
+
+
+```javascript
+mountComponent(container) {
+  const domElement = document.createElement(this._currentElement.type);
+  const textNode = document.createTextNode(this._currentElement.props.children);
+
+  domElement.appendChild(textNode);
+  container.appendChild(domElement);
+  return domElement;
+}
+```
+
+
+
+#### 更新渲染流程
+
+
+
+#### `useState`实现原理
+
+```javascript
+let _state = [], _index = 0;
+function useState(initialState) {
+  let curIndex = _index; // 记录当前操作的索引
+  _state[curIndex] = _state[curIndex] === undefined ? initialState : _state[curIndex];
+  const setState = (newState) => {
+    _state[curIndex] = newState;
+    ReactDOM.render(<App />, rootElement);
+    _index = 0; // 每更新一次都需要将_index归零，才不会不断重复增加_state
+  }
+  _index += 1; // 下一个操作的索引
+  return [_state[curIndex], setState];
+}
+```
+
+加入函数式更新和惰性初始化state，并判断是否需要刷新页面
+
+```javascript
+let _state = [],
+  _index = 0;
+function useState(initialState) {
+  let curIndex = _index;
+  if (typeof initialState === "function") {
+    initialState = initialState();
+  }
+  _state[curIndex] =
+    _state[curIndex] === undefined ? initialState : _state[curIndex];
+  const setState = newState => {
+    if (typeof newState === "function") {
+      newState = newState(_state[curIndex]);
+    }
+    if (Object.is(_state[curIndex], newState)) return; // 使用Object.is来比较_state[curIndex]是否变化，若无，则跳过更新
+    _state[curIndex] = newState;
+    ReactDOM.render(<App />, rootElement);
+    _index = 0;
+  };
+  _index += 1;
+  return [_state[curIndex], setState];
+}
+```
+
+
+
+#### `useEffect`实现原理
+
+```javascript
+
+```
+
+
+
+
+
+
+
 #### `vnode diff`
 
 具体见`vue`原理
